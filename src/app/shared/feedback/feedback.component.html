@@ -1,0 +1,26 @@
+<div
+  class="container"
+  [ngClass]="{
+    success: data.type === 'success',
+    error: data.type === 'error',
+    warning: data.type === 'warning',
+    neutral: data.type === 'neutral'
+  }"
+>
+  <div class="icon" *ngIf="showPrefixIcon()">
+    <i
+      [ngClass]="{
+        'ri-checkbox-circle-line': data.type === 'success',
+        'ri-indeterminate-circle-line': data.type === 'error',
+        'ri-error-warning-line': data.type === 'warning'
+      }"
+    >
+    </i>
+  </div>
+  <div class="message">
+    <p class="body-xx-small-regular">{{ data.message }}</p>
+  </div>
+  <div class="close">
+    <i class="ri-close-fill" (click)="close()"></i>
+  </div>
+</div>

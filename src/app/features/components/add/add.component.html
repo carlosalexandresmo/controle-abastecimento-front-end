@@ -1,0 +1,60 @@
+<app-toolbar></app-toolbar>
+
+<section>
+  <div class="box">
+    <form [formGroup]="form" class="form use-validation-colors">
+      <div class="header">
+        <button mat-icon-button (click)="onBack()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        <h2>Adicionar novo</h2>
+      </div>
+      <div class="item">
+        <mat-label>Abastecimento</mat-label>
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{ 'invalid-input': invalidInput('mileage') }"
+        >
+          <input
+            matInput
+            type="text"
+            id="mileage"
+            formControlName="mileage"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="item">
+        <mat-label>Placa</mat-label>
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{ 'invalid-input': invalidInput('plate') }"
+        >
+          <input matInput type="plate" id="plate" formControlName="plate" />
+        </mat-form-field>
+      </div>
+
+      <div class="item">
+        <mat-label>Valor Total</mat-label>
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{ 'invalid-input': invalidInput('total') }"
+        >
+          <input matInput type="total" id="total" formControlName="total" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <button mat-button class="filled" (click)="onSave()">Salvar</button>
+    <div class="loader" *ngIf="isSaving">
+      <mat-spinner
+        diameter="24"
+        strokeWidth="2"
+        class="spinner-position"
+      ></mat-spinner>
+    </div>
+  </footer>
+</section>

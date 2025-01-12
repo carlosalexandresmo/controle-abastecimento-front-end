@@ -1,0 +1,15 @@
+<section>
+    <header>
+      <h1>Excluir Item</h1>
+    </header>
+    <div class="body">
+      <p class="body-1">Deseja excluir permanentemente? Essa operação não poderá ser desfeita.</p>
+    </div>
+    <footer>
+      <mat-spinner *ngIf="isLoading" diameter="36" color="primary"></mat-spinner>
+      <button *ngIf="!isLoading" mat-raised-button color="primary" (click)="remove()">Excluir</button>
+      <button mat-raised-button (click)="close()">Cancelar</button>
+    </footer>
+  
+  </section>
+  
