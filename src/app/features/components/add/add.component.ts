@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToolbarComponent } from '../../../shared/toolbar/toolbar.component';
 import {
   FormBuilder,
@@ -10,7 +10,7 @@ import {
 import { SupplyBody } from '../../models/supply.model';
 import { Router } from '@angular/router';
 import { SupplyService } from '../../services/supply.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +39,8 @@ export class AddComponent implements OnInit {
   bodySupply: SupplyBody = {};
   isSaving: boolean = false;
 
+  @ViewChild('plate', { static: false }) plate: any;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -52,6 +54,7 @@ export class AddComponent implements OnInit {
 
   buildForm(): void {
     this.form = this.formBuilder.group({
+      date: ['', Validators.required],
       mileage: ['', Validators.required],
       plate: ['', Validators.required],
       total: ['', Validators.required],
@@ -67,9 +70,10 @@ export class AddComponent implements OnInit {
 
     this.isSaving = true;
     const rawValue = this.form.getRawValue();
-    this.bodySupply.mileage = rawValue.name;
-    this.bodySupply.plate = rawValue.email;
-    this.bodySupply.total = rawValue.role;
+    this.bodySupply.createdAt = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss', 'en');
+    this.bodySupply.mileage = rawValue.mileage;
+    this.bodySupply.plate = rawValue.plate;
+    this.bodySupply.total = rawValue.total;
     this.create(this.bodySupply);
   }
 
@@ -100,6 +104,19 @@ export class AddComponent implements OnInit {
         this.form?.get(control)?.untouched
       );
     }
+  }
+
+  onChange(value: string) {
+    let regexp = /^([0-9][0-9]?)(\.([0-9][0-9]?)?)?$/;
+    if (!value) {
+      this.plate = '';
+    }
+    if (!regexp.test(value)) {
+      this.plate.nativeElement.value = this.plate
+    } else {
+      this.plate = value;
+    }
+   
   }
 
   onBack(): void {

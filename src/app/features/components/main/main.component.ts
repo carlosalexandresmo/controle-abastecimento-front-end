@@ -44,7 +44,7 @@ import { FeedbackService } from '../../../shared/services/feedback.service';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
-export class MainComponent implements OnInit, AfterViewInit {
+export class MainComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'mileage',
@@ -84,6 +84,11 @@ export class MainComponent implements OnInit, AfterViewInit {
       });
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  
   async getSupplys(search?: string): Promise<void> {
     this.isLoading = true;
 
@@ -95,10 +100,9 @@ export class MainComponent implements OnInit, AfterViewInit {
       next: (res) => {
         this.pageable = res;
         this.isHidePageSize = this.pageable!.content.length > 0 ? false : true;
-        this.supplys = res.content; //this.pageable!.content;
+        this.supplys = res.content;
         this.total = this.pageable!.totalElements ?? 0;
         this.dataSource.sort = this.sort;
-        // this.paginator._intl.itemsPerPageLabel="Itens por página:";
         this.isLoading = false;
       },
       error: (err: HttpErrorResponse) => {
@@ -106,11 +110,6 @@ export class MainComponent implements OnInit, AfterViewInit {
         this.feedbackService.httpError(err);
       },
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

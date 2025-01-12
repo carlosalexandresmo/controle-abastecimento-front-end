@@ -9,17 +9,19 @@
           </button>
         <h2>Adicionar novo</h2>
       </div>
+
       <div class="item">
-        <mat-label>Abastecimento</mat-label>
+        <mat-label>Data e Hora</mat-label>
         <mat-form-field
           appearance="outline"
-          [ngClass]="{ 'invalid-input': invalidInput('mileage') }"
+          [ngClass]="{ 'invalid-input': invalidInput('date') }"
         >
           <input
             matInput
             type="text"
-            id="mileage"
-            formControlName="mileage"
+            id="date"
+            formControlName="date"
+            placeholder="dd/mm/yyyy hh:mm"
             required
           />
         </mat-form-field>
@@ -31,7 +33,27 @@
           appearance="outline"
           [ngClass]="{ 'invalid-input': invalidInput('plate') }"
         >
-          <input matInput type="plate" id="plate" formControlName="plate" />
+          <input matInput plateInput type="plate" id="plate" formControlName="plate" maxlength="9" placeholder="XXX-1234" />
+        </mat-form-field>
+      </div>
+
+      <div class="item">
+        <mat-label>Quilometragem</mat-label>
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="{ 'invalid-input': invalidInput('mileage') }"
+        >
+          <input
+            #plate
+            matInput
+            [ngModel]="plate" 
+            (ngModelChange)="onChange($event)"
+            type="number"
+            min="1"
+            id="mileage"
+            formControlName="mileage"
+            required
+          />
         </mat-form-field>
       </div>
 
@@ -41,14 +63,14 @@
           appearance="outline"
           [ngClass]="{ 'invalid-input': invalidInput('total') }"
         >
-          <input matInput type="total" id="total" formControlName="total" />
+          <input matInput type="total" id="total" formControlName="total" placeholder="R$" />
         </mat-form-field>
       </div>
     </form>
   </div>
 
   <footer>
-    <button mat-button class="filled" (click)="onSave()">Salvar</button>
+    <button mat-flat-button class="filled" (click)="onSave()">Salvar</button>
     <div class="loader" *ngIf="isSaving">
       <mat-spinner
         diameter="24"

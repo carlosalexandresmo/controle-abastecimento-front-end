@@ -23,6 +23,7 @@ export interface ISupply {
 }
 
 export class SupplyBody {
+  createdAt?: string;
   mileage?: number;
   plate?: string;
   total?: number;

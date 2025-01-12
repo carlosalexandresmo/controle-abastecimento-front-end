@@ -7,8 +7,8 @@
     </div>
     <footer>
       <mat-spinner *ngIf="isLoading" diameter="36" color="primary"></mat-spinner>
-      <button *ngIf="!isLoading" mat-raised-button color="primary" (click)="remove()">Excluir</button>
-      <button mat-raised-button (click)="close()">Cancelar</button>
+      <button *ngIf="!isLoading" mat-flat-button color="primary" (click)="remove()">Excluir</button>
+      <button mat-stroked-button (click)="close()">Cancelar</button>
     </footer>
   
   </section>
