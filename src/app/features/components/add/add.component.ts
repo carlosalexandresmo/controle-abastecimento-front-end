@@ -41,8 +41,6 @@ export class AddComponent implements OnInit {
   bodySupply: SupplyBody = {};
   isSaving: boolean = false;
 
-  @ViewChild('plate', { static: false }) plate: any;
-
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -106,19 +104,6 @@ export class AddComponent implements OnInit {
         this.form?.get(control)?.untouched
       );
     }
-  }
-
-  onChange(value: string) {
-    let regexp = /^([0-9][0-9]?)(\.([0-9][0-9]?)?)?$/;
-    if (!value) {
-      this.plate = '';
-    }
-    if (!regexp.test(value)) {
-      this.plate.nativeElement.value = this.plate
-    } else {
-      this.plate = value;
-    }
-   
   }
 
   onBack(): void {
