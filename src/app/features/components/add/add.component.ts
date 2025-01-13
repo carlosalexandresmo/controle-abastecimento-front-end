@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 import { FeedbackService } from '../../../shared/services/feedback.service';
+import { PlateInputDirective } from '../../../shared/directive/plate-format.directive';
 
 @Component({
   selector: 'app-add',
@@ -30,6 +31,7 @@ import { FeedbackService } from '../../../shared/services/feedback.service';
     MatProgressSpinnerModule,
     MatIcon,
     ToolbarComponent,
+    PlateInputDirective
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',

@@ -4,7 +4,6 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { PlateInputDirective } from './shared/directive/plate-format.directive';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +11,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(), provideAnimationsAsync(),
-    PlateInputDirective
   ],
 };
